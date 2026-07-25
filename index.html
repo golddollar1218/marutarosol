@@ -516,6 +516,80 @@
         font-size: 0.98rem;
       }
 
+      .gallery {
+        background:
+          radial-gradient(
+            circle at 80% 10%,
+            rgba(247, 196, 208, 0.4),
+            transparent 40%
+          ),
+          linear-gradient(180deg, #fff8f4 0%, #ffe8dc 100%);
+      }
+
+      .gallery-grid {
+        margin-top: 2.25rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+
+      @media (min-width: 640px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+      }
+
+      @media (min-width: 960px) {
+        .gallery-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .gallery-item:nth-child(1) {
+          grid-column: span 2;
+          grid-row: span 2;
+        }
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.35rem;
+        background: #f3c9b8;
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease);
+      }
+
+      .gallery-item.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        min-height: 220px;
+        object-fit: cover;
+        transition: transform 0.7s var(--ease);
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .gallery-item:nth-child(1) img {
+        min-height: 280px;
+      }
+
+      @media (min-width: 960px) {
+        .gallery-item:nth-child(1) img {
+          min-height: 100%;
+        }
+      }
+
       .join {
         background:
           linear-gradient(135deg, rgba(247, 196, 208, 0.35), transparent 48%),
@@ -656,6 +730,7 @@
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#story">Story</a>
+        <a href="#gallery">Memes</a>
         <a href="#buy">Buy</a>
         <a
           class="nav-cta"
@@ -767,6 +842,91 @@
                 </p>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery" id="gallery">
+        <div class="wrap">
+          <p class="section-kicker">Meme gallery</p>
+          <h2 class="section-title">Adventures of Marutaro</h2>
+          <p class="section-lead">
+            Wordless scenes from the smiliest Shiba’s legend — sakura roads,
+            shrine winters, and endless good vibes.
+          </p>
+          <div class="gallery-grid">
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-sakura-path.png"
+                alt="Marutaro on a cherry blossom path"
+                loading="lazy"
+                width="1600"
+                height="900"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-smiley-portrait.png"
+                alt="Marutaro smiling portrait"
+                loading="lazy"
+                width="1024"
+                height="1024"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-torii-adventure.png"
+                alt="Marutaro walking toward a torii gate"
+                loading="lazy"
+                width="1600"
+                height="900"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-garden-lantern.png"
+                alt="Young Marutaro by a stone lantern"
+                loading="lazy"
+                width="1200"
+                height="900"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-moon-legend.png"
+                alt="Marutaro on a crescent moon"
+                loading="lazy"
+                width="1024"
+                height="1024"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-train-journey.png"
+                alt="Marutaro on a Japanese train journey"
+                loading="lazy"
+                width="1600"
+                height="900"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-winter-shrine.png"
+                alt="Marutaro at a snowy shrine"
+                loading="lazy"
+                width="1024"
+                height="1024"
+              />
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="memes/meme-fuji-sunrise.png"
+                alt="Marutaro at sunrise near Mount Fuji"
+                loading="lazy"
+                width="1200"
+                height="900"
+              />
+            </figure>
           </div>
         </div>
       </section>
@@ -901,9 +1061,9 @@
         );
 
         document
-          .querySelectorAll(".timeline-item, .step")
+          .querySelectorAll(".timeline-item, .step, .gallery-item")
           .forEach(function (el, i) {
-            el.style.transitionDelay = i * 0.08 + "s";
+            el.style.transitionDelay = (i % 8) * 0.07 + "s";
             io.observe(el);
           });
       })();
